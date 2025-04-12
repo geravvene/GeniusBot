@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Результаты</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 2em;
+        background: #f9f9f9;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+      h2 {
+        margin-bottom: 0;
+      }
+      pre {
+        background: #fff;
+        padding: 1em;
+        border-radius: 10px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+      button {
+        padding: 0.5em 1em;
+        margin: 1em 0;
+        border-radius: 6px;
+        border: none;
+        background: #2e8b57;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      function copyAll() {
+        let text = "";
+        document.querySelectorAll("pre").forEach((el) => {
+          text +=
+            el.previousElementSibling.innerText + "\n" + el.innerText + "\n\n";
+        });
+        navigator.clipboard.writeText(text).then(() => alert("Скопировано!"));
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <button onclick="copyAll()">📋 Скопировать всё</button>
+      {% for item in results %}
+      <h2>{{ item.title }}</h2>
+      <pre>{{ item.lyrics }}</pre>
+      {% endfor %}
+    </div>
+  </body>
+</html>

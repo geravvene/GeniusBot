@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lyrics Fetcher</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 2em;
+        background: #f4f4f4;
+      }
+      form {
+        background: white;
+        padding: 2em;
+        border-radius: 12px;
+        max-width: 500px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      input,
+      select,
+      button {
+        padding: 0.5em;
+        width: 100%;
+        margin-top: 1em;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+      h1 {
+        text-align: center;
+      }
+      .error {
+        color: red;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="POST">
+      <h1>Lyrics Finder 🎵</h1>
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+      <input
+        type="text"
+        name="query"
+        placeholder="Введите название трека или альбома"
+        required
+      />
+      <select name="mode">
+        <option value="track">Трек</option>
+        <option value="album">Альбом</option>
+      </select>
+      <button type="submit">Поиск</button>
+    </form>
+  </body>
+</html>
