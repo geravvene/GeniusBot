@@ -2,56 +2,68 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <title>Lyrics Fetcher</title>
+    <title>Поиск текста песни</title>
     <style>
       body {
-        font-family: sans-serif;
-        padding: 2em;
-        background: #f4f4f4;
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #f4f4f4;
       }
-      form {
-        background: white;
-        padding: 2em;
-        border-radius: 12px;
-        max-width: 500px;
-        margin: auto;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      input[type="text"] {
+        width: 80%;
+        padding: 10px;
+        margin-right: 10px;
       }
-      input,
-      select,
-      button {
-        padding: 0.5em;
-        width: 100%;
-        margin-top: 1em;
+      button,
+      .copy-btn {
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: #3f51b5;
+        color: white;
+        border: none;
+        border-radius: 4px;
+      }
+      .lyrics-container {
+        margin-top: 30px;
+        background-color: #fff;
+        padding: 20px;
         border-radius: 6px;
-        border: 1px solid #ccc;
-      }
-      h1 {
-        text-align: center;
+        white-space: pre-wrap;
       }
       .error {
         color: red;
-        text-align: center;
       }
     </style>
   </head>
   <body>
+    <h1>Поиск текста песни</h1>
     <form method="POST">
-      <h1>Lyrics Finder 🎵</h1>
-      {% if error %}
-      <p class="error">{{ error }}</p>
-      {% endif %}
       <input
         type="text"
         name="query"
-        placeholder="Введите название трека или альбома"
+        placeholder="Введите название трека"
         required
       />
-      <select name="mode">
-        <option value="track">Трек</option>
-        <option value="album">Альбом</option>
-      </select>
-      <button type="submit">Поиск</button>
+      <button type="submit">Найти</button>
     </form>
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %} {% if title %}
+    <h2>{{ title }}</h2>
+    <button class="copy-btn" onclick="copyLyrics()">Скопировать текст</button>
+    <div class="lyrics-container" id="lyrics">{{ lyrics | safe }}</div>
+    {% endif %}
+
+    <script>
+      function copyLyrics() {
+        const lyrics = document.getElementById("lyrics").innerText;
+        navigator.clipboard.writeText(lyrics).then(() => {
+          alert("Текст скопирован!");
+        });
+      }
+    </script>
   </body>
 </html>
