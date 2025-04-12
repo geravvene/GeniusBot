@@ -6,7 +6,7 @@ from fastapi.staticfiles import StaticFiles
 app = FastAPI()
 
 # Вставь свой API ключ
-GENIUS_API_TOKEN = "your_genius_token_here"
+GENIUS_API_TOKEN = "5i0PtxEwhv67YvgeWhNtgV5fT2HDilE62oTf-9_9wZ_O3h3Sylfcd4RTyo2m7-7t"
 genius = lyricsgenius.Genius(GENIUS_API_TOKEN, skip_non_songs=True, remove_section_headers=True)
 
 
